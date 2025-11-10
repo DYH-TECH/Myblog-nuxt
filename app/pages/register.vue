@@ -2,7 +2,7 @@
   <div class="content">
     <div class="login-container">
       <div class="login-form">
-        <h2>登录</h2>
+        <h2>注册</h2>
         <form>
           <div class="form-group">
             <label for="username">用户名</label>
@@ -24,48 +24,36 @@
               required
             />
           </div>
-          <button type="button" class="login-btn" @click="handlelogin">
-            登录
+          <button type="submit" class="register-btn" @click="handleRegister">
+            注册
           </button>
         </form>
       </div>
       <div class="tips">
-        <p>没有账号？<NuxtLink to="/register">立即注册</NuxtLink></p>
+        <p>已有账号？<NuxtLink to="/login">立即登录</NuxtLink></p>
       </div>
     </div>
   </div>
 </template>
 <script setup lang="ts">
-import { ref } from "vue";
 import type { useUserLogReg } from "~/types/user";
-import type { useLoginResponse } from "~/types/logintype";
-const router = useRouter();
 const userform = ref<useUserLogReg>({
   username: "",
   password: "",
 });
-const handlelogin = async () => {
-  try {
-    const res = await $fetch<useLoginResponse>("/api/login", {
-      method: "POST",
-      body: {
-        username: userform.value.username,
-        password: userform.value.password,
-      },
+const handleRegister = () => {
+  $fetch("/api/register", {
+    method: "POST",
+    body: userform.value,
+  })
+    .then((res) => {
+      alert("注册成功");
+      console.log(res);
+    })
+    .catch((err) => {
+      alert("注册失败");
+      console.log(err);
     });
-
-    // 根据后端返回结构调整
-    if (res.code === 200) {
-      localStorage.setItem("token", res.data.token);
-      localStorage.setItem("username", res.data.username);
-      router.push("/");
-      alert("登录成功");
-    } else {
-      alert(res.msg || "登录失败");
-    }
-  } catch (err) {
-    console.error("登录请求出错：", err);
-  }
 };
 </script>
 <style scoped>
@@ -122,7 +110,7 @@ input[type="password"] {
   padding: 10px;
   border: 1px solid #ccc;
 }
-.login-btn {
+.register-btn {
   width: 100%;
   padding: 10px;
   background-color: #007bff;
@@ -134,7 +122,7 @@ input[type="password"] {
   margin-top: 50px;
 }
 
-.login-btn:hover {
+.register-btn:hover {
   background-color: #0056b3;
 }
 </style>
