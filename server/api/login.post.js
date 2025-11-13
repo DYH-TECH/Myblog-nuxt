@@ -14,6 +14,7 @@ export default defineEventHandler(async (event) => {
       data: {
         token: token,
         username: res[0].username,
+        user_id: res[0].user_id,
       },
     };
   } else {

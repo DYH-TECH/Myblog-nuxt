@@ -4,7 +4,7 @@
     <div class="blog-main">
       <div class="input-box">
         <input type="text" placeholder="请输入关键词" class="searchborder" />
-        <div class="tips">一共{{ blognumber }}条博客</div>
+        <div class="tips">一共{{ bloglist.length }}条博客</div>
       </div>
       <div class="bloglist">
         <div class="nonetips" v-if="bloglist.length === 0">暂无博客</div>

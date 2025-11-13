@@ -14,7 +14,13 @@ import type { Blog } from "~/types/Blog";
 //   const username = localStorage.getItem("username");
 //   console.log(token, username);
 // });
-
+// onMounted(() => {
+//   const token = localStorage.getItem("token");
+//   const username = localStorage.getItem("username");
+//   const user_id = Number(localStorage.getItem("user_id"));
+//   console.log(token, username, user_id);
+//   console.log(typeof user_id);
+// });
 const bloglist = ref([
   {
     id: 1,

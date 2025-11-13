@@ -13,7 +13,10 @@
       <span>{{ blog.summary }}</span>
     </div>
     <div class="blog-card-footer">
-      <modal :blog="blog" />
+      <div class="blog-card-readmore">
+        <span @click="showModal = true">阅读更多</span>
+      </div>
+      <modal :blog="blog" v-if="showModal" @close="showModal = false" />
     </div>
   </div>
 </template>
@@ -33,6 +36,10 @@ const props = defineProps({
   }),
 });
 const blog = props.blog as Blog;
+const showModal = ref(false);
+const toggleModal = () => {
+  showModal.value = !showModal.value;
+};
 </script>
 <style scoped>
 .blog-card {

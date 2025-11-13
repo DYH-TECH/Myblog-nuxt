@@ -4,6 +4,7 @@ export interface useLoginResponse {
   data: {
     token: string;
     username: string;
+    user_id: number;
   };
 }
 export interface useUpdateResponse {

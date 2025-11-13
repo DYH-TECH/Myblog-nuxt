@@ -13,7 +13,10 @@
       <span>{{ blog.summary }}</span>
     </div>
     <div class="blog-card-footer">
-      <modal :blog="blog" />
+      <div class="blog-card-readmore">
+        <span @click="showModal = true">阅读更多</span>
+      </div>
+      <modal :blog="blog" v-if="showModal" @close="showModal = false" />
     </div>
     <div class="delete-btn">
       <el-button type="danger" @click="$emit('delete', blog.blog_id)"
@@ -40,6 +43,7 @@ const props = defineProps({
   }),
 });
 const blog = props.blog as Blog;
+const showModal = ref(false);
 </script>
 <style scoped>
 .blog-card {

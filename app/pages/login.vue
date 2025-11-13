@@ -58,6 +58,7 @@ const handlelogin = async () => {
     if (res.code === 200) {
       localStorage.setItem("token", res.data.token);
       localStorage.setItem("username", res.data.username);
+      localStorage.setItem("user_id", res.data.user_id.toString()); // 将用户ID存储在本地存储中
       router.push("/");
       alert("登录成功");
     } else {
